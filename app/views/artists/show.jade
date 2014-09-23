@@ -1,0 +1,29 @@
+extends ../shared/template
+
+block content
+
+  #library-nav
+    ul
+      li
+        a(href='/artists') artists
+      li
+        a(href='/albums') albums
+      li
+        a(href='/songs') songs
+
+
+  #main-content
+
+    h1.artist-title= artist[0].name
+
+    .artist-details
+      img(src='/img/#{artist[0].name}/#{artist[0].photo.originalFilename}')
+    .clear
+    br
+
+    p.title Discography:
+    each album in albums
+      .artist-album
+        a(href='/albums/#{album._id}')
+          h3= album.name
+          img(src='/img/#{album.name}/#{album.photo.originalFilename}')

@@ -1,0 +1,70 @@
+extends ../shared/template
+
+block content
+
+  #library-nav
+    ul
+      li
+        a(href='/artists') artists
+      li
+        a(href='/albums') albums
+      li
+        a(href='/songs') songs
+
+  #main-content
+
+    h2.genre= genre
+
+    each song in songs
+      .song
+        h2.song-title= song.name
+        .songdelete
+          form(method='POST', action='/songs/#{song._id}')
+            input(type='hidden', name='_method', value='DELETE')
+            button
+              i.fa.fa-trash-o
+        p.inline Album: #{song.album.name}
+        p.inline Artist: #{song.album.artist.name}
+        .clear
+        audio(src='#{song.file}', controls=true)
+
+
+
+
+
+
+    //- #library-nav
+    //-   ul
+    //-     li
+    //-       a(href='/artists') artists
+    //-     li
+    //-       a(href='/albums') albums
+    //-     li
+    //-       a(href='/songs') songs
+    //-
+    //- #main-content
+    //-
+    //-   h1.title Songs
+    //-   a.btn-addnew(href='#') Add new song
+    //-   a.btn-filter(href='#') Filter songs by genre
+    //-   .clear
+    //-   br
+    //-   #genres
+    //-     each genre in genres
+    //-       a.genre(href='/songs/filter/#{genre}')
+    //-         p= genre
+    //-
+    //-   #songlist
+    //-   each song in songs
+    //-     //img.album-detail(src='/img/#{albums[0].name}/#{albums[0].photo.originalFilename}')
+    //-     .song
+    //-       h2.song-title= song.name
+    //-       .songdelete
+    //-         form(method='POST', action='/songs/#{song._id}')
+    //-           input(type='hidden', name='_method', value='DELETE')
+    //-           button
+    //-             i.fa.fa-trash-o
+    //-       p.inline Album: #{song.album.name}
+    //-       p.inline Artist: #{song.album.artist.name}
+    //-       .clear
+    //-       audio(src='#{song.file}', controls=true)

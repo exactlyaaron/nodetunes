@@ -1,0 +1,28 @@
+extends ../shared/template
+
+block content
+
+  #library-nav
+    ul
+      li
+        a(href='/artists') artists
+      li
+        a(href='/albums') albums
+      li
+        a(href='/songs') songs
+
+
+  #main-content
+
+    h1.album-title= albums[0].name
+    .albumdetail-info
+      img.album-detail(src='/img/#{albums[0].name}/#{albums[0].photo.originalFilename}')
+
+    //p.album-artist Artist: #{albums[0].artist.name}
+
+    #songs
+      each song in songs
+        p= song.name
+        audio(src='#{song.file}', controls=true)
+
+        .clear

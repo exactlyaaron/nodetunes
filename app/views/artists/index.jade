@@ -1,0 +1,37 @@
+extends ../shared/template
+
+block content
+
+  .add-new-wrapper
+    .add-new-content
+      form(method='POST', action='/artists', enctype='multipart/form-data')
+        input(type='text', name='name', placeholder='Artist Name')
+        div
+          p.photo Photo of Artist
+          input(type='file', name='artistPhoto')
+        button Add Artist
+
+
+  #library-nav
+    ul
+      li
+        a(href='/artists') artists
+      li
+        a(href='/albums') albums
+      li
+        a(href='/songs') songs
+
+  #main-content
+
+    h1.title Artists
+    a.btn-addnew(href='#') Add new artist
+
+    #artists
+      each artist in artists
+        .artist-profile
+          a(href='/artists/#{artist._id}')
+            h3.artist-name= artist.name
+            .clear
+            .artist-pic
+              img(src='/img/#{artist.name}/#{artist.photo.originalFilename}')
+          .clear

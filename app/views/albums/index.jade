@@ -1,0 +1,47 @@
+extends ../shared/template
+
+block content
+
+  .add-new-wrapper
+    .add-new-content
+      form(method='POST', action='/albums', enctype='multipart/form-data')
+          input(type='text', name='name', placeholder='Album Name')
+          p.photo Album Cover Art
+          input(type='file', name='albumPhoto')
+          .clear
+          p.photo Album Artist
+          select(name='artistId')
+            each artist in artists
+              option(value='#{artist._id}')= artist.name
+          .clear
+          button.addalbm Add Album
+
+
+  #library-nav
+    ul
+      li
+        a(href='/artists') artists
+      li
+        a(href='/albums') albums
+      li
+        a(href='/songs') songs
+
+  #main-content
+
+    h1.title Albums
+    a.btn-addnew(href='#') Add new album
+
+    #albums
+      each album in albums
+        .album
+          a(href='/albums/#{album._id}')
+            img(src='/img/#{album.name}/#{album.photo.originalFilename}')
+            .album-info
+              h3.album-name= album.name
+              p.album-artist Artist: #{album.artist.name}
+          .delete
+            form(method='POST', action='/albums/#{album._id}')
+              input(type='hidden', name='_method', value='DELETE')
+              button
+                i.fa.fa-trash-o
+          .clear
